@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.1 Strict//EN" "http://www.w3.org/TR/REC-html4/strict.dtd">
+<html>
+<head>
+<meta name="GENERATOR" content="PasDoc 0.8.8"/>
+<title>StringComparator: Class TStringComparator</title>
+<link rel="StyleSheet" href="pasdoc.css"/>
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#800080" alink="#FF0000">
+<a name="TStringComparator"></a><h1>Class TStringComparator</h1>
+<table class="sections"><tr>
+<td><a class="section" href="#@Description">Description</a></td><td><a class="section" href="#@Hierarchy">Hierarchy</a></td><td>Fields</td><td><a class="section" href="#@Methods">Methods</a></td><td>Properties</td></tr></table>
+<a name="@Description"></a><h2>Unit</h2>
+<a class="bold" href="StringComparator.html">StringComparator</a><br/><h2>Declaration</h2>
+<p><code>type TStringComparator = class(TObject)</code></p>
+<h2>Description</h2>
+class containing the string comparison algorithms<p><p> The purpose of this class is to implement the string comparison Algorithms   described on the paper &quot;Advanced Methods for Record Linkage&quot;, by William E. Winkler,    Bureau of the Census, Washington DC 20233-9100. The document can be accessed at <a class="normal" target="_new" href="http://www.census.gov/srd/www/abstract/rr94-5.html">http://www.census.gov/srd/www/abstract/rr94-5.html</a></p>       <p> It was used the code on <a class="normal" target="_new" href="http://www.census.gov/geo/msb/stand/strcmp.c">http://www.census.gov/geo/msb/stand/strcmp.c</a>    as a base for this program</p>        <p> The Lynch algorithm is the most advanced one and should be preferred </p> </p>
+<a name="@Hierarchy"></a><h2>Hierarchy</h2>
+TStringComparator&nbsp;&gt; TObject<a name="@Methods"></a><h2>Methods</h2>
+<h3>Overview</h3>
+<table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><code>function <a class="normal" href="StringComparator.TStringComparator.html#calculateJaro"><b>calculateJaro</b></a>(): double;</code></td>
+</tr>
+<tr class="list2" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td><code>function <a class="normal" href="StringComparator.TStringComparator.html#calculateLynch"><b>calculateLynch</b></a>(): double;</code></td>
+</tr>
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td><code>function <a class="normal" href="StringComparator.TStringComparator.html#calculateMcLaughlin"><b>calculateMcLaughlin</b></a>(): double;</code></td>
+</tr>
+<tr class="list2" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td><code>function <a class="normal" href="StringComparator.TStringComparator.html#calculateWinkler"><b>calculateWinkler</b></a>(): double;</code></td>
+</tr>
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td><code>procedure <a class="normal" href="StringComparator.TStringComparator.html#setNomes"><b>setNomes</b></a>(s1,s2: String);</code></td>
+</tr>
+</table>
+<h3>Description</h3>
+<table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><a name="calculateJaro"></a><code>function <b>calculateJaro</b>(): double;</code></td>
+</tr>
+</table>
+<p><p><p> Calculates equivalence between the strings using the Jaro algorithm.</p>             Uses the following formula: <br>     where: <br>     <b> c1</b>  = common characters on the 1st string <br>     <b> c2</b>  = common characters on the 2nd string <br>     <b> s1</b>  = size of the 1st string <br>     <b> s2</b>  = size of the 2nd string <br>     <b> t</b>  = transpositions <br>     <b> w1</b>  = c1/s1 <br>     <b> w2</b>  = c2/s2 <br>     <b> w3</b>  = (c1-t/2)/c1 <br>     <b> Jaro</b>  = (w1+w2+w3)/3 <br> </p>
+</p>
+<h6>returns</h6>
+<p class="return">the result of the Jaro calculation</p><table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><a name="calculateLynch"></a><code>function <b>calculateLynch</b>(): double;</code></td>
+</tr>
+</table>
+<p><p>Calculates equivalence between the strings using the Lynch algorithm.     Uses the McLaughlin algorithm as the base value        Boosts the comparator value if more than half of the characters beyond the first     four are equal.</p>
+</p>
+<h6>returns</h6>
+<p class="return">the result of the Lynch calculation</p><table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><a name="calculateMcLaughlin"></a><code>function <b>calculateMcLaughlin</b>(): double;</code></td>
+</tr>
+</table>
+<p><p><p> Calculates equivalence between the strings using the McLaughlin algorithm.    This algorithm uses the similar characters to boost the result. It calls the     Winkler method after the calculation</p>         Uses the following formula:<br>     having:<br>     <b> c1</b>  = common characters on the 1st string <br>     <b> c2</b>  = common characters on the 2nd string <br>     <b> s1</b>  = size of the 1st string <br>     <b> s2</b>  = size of the 2nd string <br>     <b> sm1</b>  = similarities on the 1st string <br>     <b> sm2</b>  = similarities on the 2nd string <br>     <b> t</b>  = transpositions <br>     <b> w1</b>  = (c1+sm1*0.3)/s1 <br>     <b> w2</b>  = (c2+sm2*0.3)/s2 <br>     <b> w3</b>  = (c1-t/2)/c1 <br>     <b> Jaro</b>  = (w1+w2+w3)/3 <br> </p>
+</p>
+<h6>returns</h6>
+<p class="return">the result of the McLaughlin calculation</p><table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><a name="calculateWinkler"></a><code>function <b>calculateWinkler</b>(): double;</code></td>
+</tr>
+</table>
+<p><p><p> Calculates equivalence between the strings using the Winkler algorithm.    This algorithm counts how many characters are shared up to the 4th char and    boosts the result.</p> </p>
+</p>
+<h6>returns</h6>
+<p class="return">the result of the Winkler calculation</p><table cellspacing="2" cellpadding="4" width="100%">
+<tr class="list" valign="top"><td><a class="normal" href="legend.html"><img border="0" src="public.gif" alt="Public"/></a></td>
+<td width="100%"><a name="setNomes"></a><code>procedure <b>setNomes</b>(s1,s2: String);</code></td>
+</tr>
+</table>
+<p><p><p> Sets the strings and calculates values that are uses by the other methods<p>     <p> <em><b> Common</b></em>  characters are the characters that are on the other string at half length -1 of the shorter string.    The common characters are recorded on others strings that are used to calculate the traspositions.</p>     <p> <em><b> Transpositions</b></em>  are characters that out of order with the correspondent one on the other string</p>     <p> <em><b> Similarities</b></em>  are errors that occur due to wrong typing or mispelling. Similarities are calculated like     common characters</p> </p>
+</p>
+<h6>parameters</h6>
+<dl class="parameters">
+<dt class="parameters">
+s1</dt>
+<dd class="parameters">
+ the 1st string to be compared</dd>
+<dt class="parameters">
+s2</dt>
+<dd class="parameters">
+ the 2nd string to be compared</dd>
+</dl>
+<h2>Author</h2>
+<p>Andr&eacute; Cipriani Bandarra (<a class="normal" href="mailto:andre@bandarra.org">andre@bandarra.org</a>)</p>
+<hr noshade="1" size="1"/><em>Generated by <a class="normal" target="_new" href="http://pasdoc.sourceforge.net/">PasDoc 0.8.8</a> on 2005-06-07 11:06:52</em>
+</body></html>
